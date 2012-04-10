@@ -7,6 +7,8 @@ v2.0	::  Forminator turned into a jQuery plugin:
 			Only stores data for the form for which you apply the method
 			changed storage key to be  [form id]-[name attr]
 			added some notes at the top of the plugin
+v2.1    ::  StoredFields argument works now, so you can add whatever selectors you want. Range field is fixed and 					capturing data
+
 Usage:       Just download form_protector.js and set $(yourform).forminator() for the default actions
 
 Upcoming: going to set in some default properties that cover all of the inputs 

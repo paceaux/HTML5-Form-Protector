@@ -16,37 +16,35 @@
 /*   VERSIONS
 *       0.1.0 - First working version
 *       0.2.0 - Turned into a jQuery plugin
+*       0.2.1 - Actually got the storedFields argument working, fixed the range field
 */
 ;(function ( $ ) {
-$.fn.forminator = function(storedFields, storageKey, clearButton) {
-    form = this;    
-// CAPTURE FORM DATA
-//take whatever the input field is, put its value in storage on keyup
-$(form).children('input, datalist, keygen, optgroup, select, textarea').keyup(function(event){ 
-    var name = $(form).attr("id")+"-" + $(this).attr(storageKey);
-    var value = $(this).val();
-    localStorage.setItem(name, value);
-    currentval = $(this).val();
-});
-//use this for the input slider - since it doesn't use the keyboard
-$(form).children('[type="range"]').mousemove(function(event){
-    var name = $(this).attr(storageKey);
-    var value = $(this).val();
-    localStorage.setItem(name, value);
-    currentval = $(this).val();
-});
-//load the values into input forms
-$(form).children('input,textarea,select, datalist, keygen, optgroup').each(function(event) {
-    var fieldkey = $(form).attr("id") + "-" + $(this).attr(storageKey);
-    var fieldval = localStorage.getItem(fieldkey);
-    $(this).val(fieldval);
-});
-$(clearButton).click(function(event){
-    localStorage.clear();    
-});
-//Copyright 2011. All rights reserved.
-//rights are also reserved for Alexandar Kaupanin to piss off for his article on smashing magazine 5 days after I published mine on my blog. 
-};
+    $.fn.forminator = function(storedFields, storageKey, clearButton) {
+        form = this;    
+        // CAPTURE FORM DATA
+        $(form).children(storedFields).keyup(function(event){ 
+            var name = $(form).attr("id")+"-" + $(this).attr(storageKey);
+            var value = $(this).val();
+            localStorage.setItem(name, value);
+            currentval = $(this).val();
+        });
+        //use this for the input slider - since it doesn't use the keyboard
+        $(form).children('[type="range"]').mousemove(function(event){
+            var name = $(form).attr("id") +"-"+ $(this).attr(storageKey);
+            var value = $(this).val();
+            localStorage.setItem(name, value);
+            currentval = $(this).val();
+        });
+        //LOAD FORM DATA
+        $(form).children(storedFields).each(function(event) {
+            var fieldkey = $(form).attr("id") + "-" + $(this).attr(storageKey);
+            var fieldval = localStorage.getItem(fieldkey);
+            $(this).val(fieldval);
+        });
+        $(clearButton).click(function(event){
+            localStorage.clear();    
+        });
+    };
 })(jQuery);
 
-$('#elformo').forminator('input', 'name', '#clearIt');
+$('#elformo').forminator('input, datalist, keygen, optgroup, select, textarea', 'name', '#clearIt');​
