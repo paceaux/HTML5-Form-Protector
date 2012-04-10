@@ -1,4 +1,10 @@
-Author:       Frank M. Taylor. 
-HTML Notes:   Make sure every HTML form field that you want to protect has a name
-References:   My blog post: http://blog.frankmtaylor.com/2011/12/01/using-html5s-localstorage-api-for-protecting-forms/
+Author:      	 	Frank M. Taylor. 
+References:   		My blog post: http://blog.frankmtaylor.com/2011/12/01/using-html5s-localstorage-api-for-protecting-forms/
+Version History:	
+v1.0	::	Forminator published. basic functionality for local storage protection on all form inputs
+v2.0	::  Forminator turned into a jQuery plugin:
+			Accepts three arguments: fields to protect, attribute to use as a key, clear button
+			Only stores data for the form for which you apply the method
+			changed storage key to be  [form id]-[name attr]
+			added some notes at the top of the plugin
 Usage:        The demo is amazingly unfancy. Just download form_protector.js, insert it, and watch the magic happen. You will need to decide how you want to clear the local storage. in my HTML, I just put a button with inline JavaScript for that. 
